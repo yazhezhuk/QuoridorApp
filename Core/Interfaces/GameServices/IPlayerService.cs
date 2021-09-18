@@ -4,9 +4,6 @@ namespace Core.Interfaces.GameServices
 {
 	public interface IPlayerService
 	{
-		void IsPlayerMove(Player player)
-		{
-			
-		}
+		bool IsPlayerMove(Player player) => true;
 	}
 }

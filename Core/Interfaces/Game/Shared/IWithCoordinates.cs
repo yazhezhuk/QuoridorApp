@@ -1,8 +1,9 @@
+using Core.Game.Objects;
+
 namespace Core.Interfaces.Game
 {
 	public interface IWithCoordinates
 	{
-		int X { get; set; }
-		int Y { get; set; }
+		Coordinates Coordinates { get; set; }
 	}
 }

@@ -6,10 +6,10 @@ namespace Core.Game.Objects
 {
 	public class Field : AbstractGameObject
 	{
-		public IList<Wall> Walls { get; set; }
-		public IList<Cell> Cells { get; set; }
+		public List<Wall> Walls { get; set; }
+		public List<Cell> Cells { get; set; }
 
-		public Field(IList<Cell> gameCells, IList<Wall> gameWalls)
+		public Field(List<Cell> gameCells, List<Wall> gameWalls)
 		{
 			Cells = gameCells;
 			Walls = gameWalls;
