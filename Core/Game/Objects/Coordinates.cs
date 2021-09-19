@@ -34,5 +34,11 @@ namespace Core.Game.Objects
 		public bool IsNeighbourInDiagonalWith(Coordinates other) =>
 			Math.Abs(other.X - X) == Math.Abs(other.Y - Y);
 
+		public static bool operator ==(Coordinates c1, Coordinates c2)
+			=> c1?.X == c2?.X && c1?.Y == c2?.Y;
+
+		public static bool operator !=(Coordinates c1, Coordinates c2)
+			=> !(c1 == c2);
+
 	}
 }

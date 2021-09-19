@@ -1,10 +1,13 @@
+using Core.Game.Objects;
 using Core.Game.Types;
 
-namespace Core.Interfaces.Game
+namespace Core.Interfaces.Game.Objects
 {
 	public interface IWall : IGameObject
 	{
-		const int WallSize = 2;
+		public const int WallSize = 2;
 		WallDirection WallDirection { get; }
+		public Coordinates BeginCoordinates { get; }
+		public Coordinates EndCoordinates { get; }
 	}
 }
