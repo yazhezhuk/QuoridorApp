@@ -6,4 +6,10 @@ namespace Core.Game.Types
 		Vertical,
 		None
 	}
+	public enum MoveDirection
+	{
+		Horizontal,
+		Vertical,
+		Diagonal
+	}
 }
