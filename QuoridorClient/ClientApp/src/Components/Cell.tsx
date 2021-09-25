@@ -1,14 +1,30 @@
 import React from "react";
-import { CustomDisplayObject, CustomPIXIComponent } from "react-pixi-fiber";
-import * as PIXI from "pixi.js";
+import {  CustomPIXIComponent } from "react-pixi-fiber";
+import {Graphics} from "pixi.js";
 
 interface Props {
-  
+  fill: number;
+  position:{
+    x: number
+    y: number
+  };
+  width:number
+  height:number
 }
 
-const TYPE = "Cell";
-export let behavior = {
-  customDisplayObject: () => new PIXI.Graphics(),
-};
+export default CustomPIXIComponent<Graphics,Props>({
 
-export default CustomPIXIComponent(behavior, TYPE);
+  customDisplayObject: () => new Graphics(),
+  customApplyProps: function(instance, oldProps, newProps) {
+   
+    const { fill, position, width, height, ...newPropsRest } = newProps;
+    const { fill: oldFill, position: oldPosition, width: oldWidth, height: oldHeight, ...oldPropsRest } = oldProps;
+    const {x,y} = position
+    if (typeof oldProps !== "undefined") {
+      instance.clear();
+    }
+    instance.beginFill(0xeee);
+    instance.drawRect(x, y, width, height);
+    instance.endFill();
+  },
+}, 'Cell')
