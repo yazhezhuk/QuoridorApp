@@ -5,7 +5,9 @@ namespace Core.Game.Objects.Moves
 {
 	public class PutWallMove : Move<Wall>
 	{
-		public PutWallMove(IWallCoordinatesChange coordinatesChange)
+		public IWallCoordinatesDisplacement PositionDisplacement { get; set; }
+
+		public PutWallMove(IWallCoordinatesDisplacement coordinatesChange)
 		{
 			PositionDisplacement = coordinatesChange;
 		}

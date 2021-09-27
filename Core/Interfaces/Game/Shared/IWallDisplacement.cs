@@ -1,6 +1,6 @@
 namespace Core.Interfaces.Game.Shared
 {
-	public interface IWallCoordinatesChange : IObjectDisplacement
+	public interface IWallCoordinatesDisplacement : IObjectDisplacement
 	{
 		
 	}

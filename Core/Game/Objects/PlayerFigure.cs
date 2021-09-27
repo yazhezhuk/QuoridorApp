@@ -6,11 +6,13 @@ namespace Core.Game.Objects
 {
 	public class PlayerFigure : AbstractGameObject, IWithCoordinates
 	{
+		public PlayerFigure(Coordinates coordinates)
+		{
+			Coordinates = coordinates;
+		}
+		
 		public string Name { get; set; }
 		public int WallRemains { get; } = 10;
-
-		public Cell CurrentCell { get; set; } 
-		public List<Wall> PlacedWalls { get; set; }
 		public Coordinates Coordinates { get; set; }
 	}
 }

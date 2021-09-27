@@ -19,11 +19,11 @@ namespace Core.Game.Objects
 				switch (WallDirection)
 				{
 					case WallDirection.Horizontal:
-						return new Coordinates(OffsetFromEdge, Line + 1);
+						return new Coordinates(OffsetFromEdge, Line);
 					case WallDirection.Vertical:
-						return new Coordinates( Line + 1, OffsetFromEdge);
+						return new Coordinates( Line, OffsetFromEdge);
 				}
-				return null;
+				return new Coordinates();
 
 			} 
 			 }
@@ -39,7 +39,7 @@ namespace Core.Game.Objects
 					case WallDirection.Vertical:
 						return new Coordinates(Line + 1, OffsetFromEdge + IWall.WallSize);
 				}
-				return null;
+				return new Coordinates();
 			}
 		}
 	}

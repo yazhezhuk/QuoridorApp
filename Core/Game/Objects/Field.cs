@@ -23,6 +23,9 @@ namespace Core.Game.Objects
 			}
 		}
 
+
+
+
 		public Field(List<Cell> gameCells, List<Wall> gameWalls)
 		{
 			Cells = gameCells;
