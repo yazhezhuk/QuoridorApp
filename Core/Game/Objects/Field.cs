@@ -4,7 +4,7 @@ using Core.GameStates;
 
 namespace Core.Game.Objects
 {
-	public class Field : AbstractGameObject
+	public class Field : GameObject
 	{
 		public List<Wall> Walls { get; set; }
 		public List<Cell> Cells { get; }
@@ -13,7 +13,7 @@ namespace Core.Game.Objects
 		{
 			get
 			{
-				Cell[,] cells = {};
+				var cells = new Cell[9,9];
 				for (var i = 0; i < 9; i++)
 				{
 					for (var j = 0; j < 9; j++)

@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using Core.GameObjects;
 using Core.Interfaces.Game;
+using Core.Interfaces.Game.Shared;
 
 namespace Core.Game.Objects
 {
-	public class PlayerFigure : AbstractGameObject, IWithCoordinates
+	public class PlayerFigure : GameObject, IWithCoordinates
 	{
 		public PlayerFigure(Coordinates coordinates)
 		{

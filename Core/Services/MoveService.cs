@@ -21,11 +21,12 @@ namespace Core.Services
 				.ToList()
 				.ForEach(Console.WriteLine);
 			Console.WriteLine(move.PositionDisplacement);
+
 			return !_fieldService.GetAllBlockedDisplacements()
 				       .ToHashSet()
 				       .Contains(move.PositionDisplacement) &&
-			       _fieldService.CanMoveToCell(
-				       _fieldService.GetCellByPosition(move.PositionDisplacement.FromCoordinates),
+			       !_fieldService.GetCellByPosition(move.PositionDisplacement.NewCoordinates).HasPlayerFigure() &&
+			       _fieldService.ValidateMoveToCell(_fieldService.GetCellByPosition(move.PositionDisplacement.FromCoordinates),
 			_fieldService.GetCellByPosition(move.PositionDisplacement.NewCoordinates));
 
 

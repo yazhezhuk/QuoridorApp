@@ -3,8 +3,22 @@ using Ardalis.GuardClauses;
 
 namespace Core.Game.Objects
 {
-	public struct Coordinates
+	public struct Coordinates : IComparable<Coordinates>
 	{
+		public bool Equals(Coordinates other)
+		{
+			return X == other.X && Y == other.Y;
+		}
+
+		public override bool Equals(object obj)
+		{
+			return obj is Coordinates other && Equals(other);
+		}
+
+		public override int GetHashCode()
+		{
+			return HashCode.Combine(X, Y);
+		}
 
 		public int X { get; private set; }
 		public int Y { get; private set;}
@@ -39,13 +53,18 @@ namespace Core.Game.Objects
 
 
 		public bool IsNeighbourInColumnWith(Coordinates other) =>
-			(Math.Abs(other.X - X) == 0) && (Math.Abs(other.Y - Y) == 1);
+			(Math.Abs(other.X - X) == 0) && (Math.Abs(other.Y - Y) <= 1);
 		
 		public bool IsNeighbourInRowWith(Coordinates other) =>
-			(Math.Abs(other.Y - Y) == 0) && (Math.Abs(other.X - X) == 1);
+			(Math.Abs(other.Y - Y) == 0) && (Math.Abs(other.X - X) <= 1);
 
 		public bool IsNeighbourInDiagonalWith(Coordinates other) =>
-			Math.Abs(other.X - X) == Math.Abs(other.Y - Y);
+			Math.Abs(other.X - X) == 1 && Math.Abs(other.X - X) == Math.Abs(other.Y - Y);
 
+		public int CompareTo(Coordinates other)
+		{
+			var xComparison = X.CompareTo(other.X);
+			return xComparison != 0 ? xComparison : Y.CompareTo(other.Y);
+		}
 	}
 }
