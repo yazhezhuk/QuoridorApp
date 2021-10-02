@@ -10,6 +10,5 @@ namespace Core.Interfaces.GameServices
 {
 	public interface IFieldService
 	{
-		public IList<PlayerFigureDisplacement> DisplacementsBlockedByWall(Wall wall);
 	}
 }

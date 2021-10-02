@@ -1,25 +1,31 @@
 using System.Collections.Generic;
+using System.Linq;
 using Core.Game.Objects;
+using Core.Game.Objects.Actions;
 using Core.Game.Types;
+using Core.GameStates;
 
 namespace Core.Services
 {
 	public class WallService
 	{
-		private List<Wall> _walls { get; set; }
+		private readonly GameSession _gameSession;
 
-		public WallService(List<Wall> walls)
+
+		public List<Wall> GetAllWalls() => _gameSession.GameField.Walls;
+		public void AddWall(Wall wall) => _gameSession.GameField.Walls.Add(wall);
+		public void RemoveWall(Wall wall) => _gameSession.GameField.Walls.Remove(wall);
+
+
+		public WallService(GameSession gameSession)
 		{
-			_walls = walls;
+			_gameSession = gameSession;
 		}
 
-		public IReadOnlyCollection<Wall> GetAllWalls() => _walls.AsReadOnly();
+		public List<PlayerFigureDisplacement> GetWallBlockedDisplacement(Wall wall) =>
+			wall.GetBlockedDisplacements();
 
-		public void TryPlaceWall(int id, int line, int offset, WallDirection wallDirection)
-		{
-			var wall = _walls.Find(wall => wall.Id == id);
-			
-		}
-		
+
+
 	}
 }

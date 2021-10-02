@@ -12,6 +12,6 @@ namespace Core.Game.Types
 		West = 1,
 		East = 2,
 		South = 3,
-		None
+		Diagonal
 	}
 }

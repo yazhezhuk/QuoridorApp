@@ -10,11 +10,20 @@ namespace Core.Game.Objects
 		{
 			Coordinates = startCoordinates;
 		}
-		
+
 		public PlayerFigure StandingPlayer { get; set; } = null;
 		public Coordinates Coordinates { get; set; }
 
 		public bool HasPlayerFigure() => StandingPlayer != null;
+
+
+
+
+		public int GetDistanceToCell(Cell other)
+		{
+			return ( Math.Abs(other.Coordinates.X - Coordinates.X)) +
+			                         Math.Abs((other.Coordinates.Y - Coordinates.Y));
+		}
 
 		public bool Equals(Cell other)
 		{
@@ -23,12 +32,6 @@ namespace Core.Game.Objects
 			return Equals(StandingPlayer, other.StandingPlayer) && Coordinates.Equals(other.Coordinates);
 		}
 
-		public float GetDistanceToCell(Cell other)
-		{
-			return (float)Math.Sqrt( Math.Abs(other.Coordinates.X - Coordinates.X) * Math.Abs(other.Coordinates.X - Coordinates.X) +
-			                         Math.Abs((other.Coordinates.Y - Coordinates.Y) * Math.Abs(other.Coordinates.Y - Coordinates.Y)
-			                         ));
-		}
 
 		public override bool Equals(object obj)
 		{
