@@ -1,9 +1,10 @@
 using System;
 using Core.Interfaces.Game;
+using Core.Interfaces.Game.Shared;
 
 namespace Core.Game.Objects
 {
-	public class Cell : AbstractGameObject, IWithCoordinates, IEquatable<Cell>
+	public class Cell : GameObject, IWithCoordinates, IEquatable<Cell>
 	{
 		public Cell(Coordinates startCoordinates)
 		{
@@ -13,11 +14,20 @@ namespace Core.Game.Objects
 		public PlayerFigure StandingPlayer { get; set; } = null;
 		public Coordinates Coordinates { get; set; }
 
+		public bool HasPlayerFigure() => StandingPlayer != null;
+
 		public bool Equals(Cell other)
 		{
 			if (ReferenceEquals(null, other)) return false;
 			if (ReferenceEquals(this, other)) return true;
 			return Equals(StandingPlayer, other.StandingPlayer) && Coordinates.Equals(other.Coordinates);
+		}
+
+		public float GetDistanceToCell(Cell other)
+		{
+			return (float)Math.Sqrt( Math.Abs(other.Coordinates.X - Coordinates.X) * Math.Abs(other.Coordinates.X - Coordinates.X) +
+			                         Math.Abs((other.Coordinates.Y - Coordinates.Y) * Math.Abs(other.Coordinates.Y - Coordinates.Y)
+			                         ));
 		}
 
 		public override bool Equals(object obj)

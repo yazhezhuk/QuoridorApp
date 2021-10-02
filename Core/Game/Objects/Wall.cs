@@ -4,8 +4,10 @@ using Core.Interfaces.Game.Objects;
 
 namespace Core.Game.Objects
 { 
-	public class Wall : AbstractGameObject, IWall
+	public class Wall : GameObject
 	{
+		public const int WallSize = 1;
+
 		public WallDirection WallDirection { get; set; } = WallDirection.None;
 		
 		public int OffsetFromEdge { get; set; }
@@ -35,9 +37,9 @@ namespace Core.Game.Objects
 				switch (WallDirection)
 				{
 					case WallDirection.Horizontal:
-						return new Coordinates(OffsetFromEdge + IWall.WallSize, Line + 1);
+						return new Coordinates(OffsetFromEdge  + WallSize , Line);
 					case WallDirection.Vertical:
-						return new Coordinates(Line + 1, OffsetFromEdge + IWall.WallSize);
+						return new Coordinates(Line, OffsetFromEdge + WallSize);
 				}
 				return new Coordinates();
 			}

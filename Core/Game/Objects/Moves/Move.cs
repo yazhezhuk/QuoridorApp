@@ -3,7 +3,7 @@ using Core.Interfaces.Game.Shared;
 
 namespace Core.Game.Objects.Moves
 {
-	public abstract class Move<TTarget> : AbstractGameObject
+	public abstract class Move<TTarget> : GameObject
 	{
 
 	}

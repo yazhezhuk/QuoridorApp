@@ -3,7 +3,7 @@ using Core.Interfaces.Game;
 
 namespace Core.Game.Objects
 {
-	public abstract class AbstractGameObject : IGameObject
+	public abstract class GameObject
 	{
 		public int Id { get; set; }
 	}
