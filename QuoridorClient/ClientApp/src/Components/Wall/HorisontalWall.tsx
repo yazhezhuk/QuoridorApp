@@ -1,27 +1,28 @@
-import React from "react";
-import {  CustomPIXIComponent } from "react-pixi-fiber";
-import {Graphics} from "pixi.js";
+import { PixiComponent } from '@inlet/react-pixi'
+import { Graphics } from 'pixi.js'
 
-interface Props {
-    position: { x: number; y: number };
-    color: number;
-    width: number;
-    height: number;
-  }
+interface WallProps {
+  x: number
+  y: number
+  width: number
+  height: number
+  color: number
+}
 
-export default CustomPIXIComponent<Graphics,Props>({
-
-  customDisplayObject: () => new Graphics(),
-  customApplyProps: function(instance, oldProps, newProps) {
-   
-    const { color, position, width, height, ...newPropsRest } = newProps;
-    const { color: oldFColor, position: oldPosition, width: oldWidth, height: oldHeight, ...oldPropsRest } = oldProps;
-    const {x,y} = position
-    if (typeof oldProps !== "undefined") {
-      instance.clear();
+const HorisontalWall = PixiComponent<WallProps, Graphics>('HorisontalWall', {
+  create: () => new Graphics(),
+  applyProps: (ins, _, props) => {
+    const height =  window.screen.availHeight * 0.8 / 44;
+    const width =window.screen.availHeight * 0.8 / 11;
+    const summ = width+height
+    const position = {
+      x: summ / 2 * props.x,
+      y:(summ/2)*props.y + width
     }
-    instance.beginFill(0xeee);
-    instance.drawRect(x, y, width, height);
-    instance.endFill();
+   
+    ins.beginFill(props.color)
+    ins.drawRect(position.x, position.y, width, height)
+    ins.endFill()
   },
-}, 'HorisontalWall')
+})
+export default HorisontalWall;
