@@ -2,7 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuoridorClient", "QuoridorClient\QuoridorClient.csproj", "{9CC945D6-742B-4278-B45A-AFA4C9101F0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{9C3CF412-95E8-4F82-9799-0DD03189A393}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{9C3CF412-95E8-4F82-9799-0DD03189A393}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLI", "CLI\CLI.csproj", "{9ABA5CD3-1493-429F-AA52-CD6ECB4FDFBE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +20,9 @@ Global
 		{9C3CF412-95E8-4F82-9799-0DD03189A393}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C3CF412-95E8-4F82-9799-0DD03189A393}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C3CF412-95E8-4F82-9799-0DD03189A393}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9ABA5CD3-1493-429F-AA52-CD6ECB4FDFBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9ABA5CD3-1493-429F-AA52-CD6ECB4FDFBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9ABA5CD3-1493-429F-AA52-CD6ECB4FDFBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9ABA5CD3-1493-429F-AA52-CD6ECB4FDFBE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

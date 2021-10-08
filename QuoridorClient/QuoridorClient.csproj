@@ -26,10 +26,17 @@
         <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="ClientApp\src" />
-      <Folder Include="Controllers" />
+      <Folder Include="ClientApp\src\Utils" />
       <Folder Include="Data" />
       <Folder Include="Models" />
+    </ItemGroup>
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Pages\Error.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\_LoginPartial.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\_ViewImports.cshtml" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Model\Model.csproj" />
     </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
