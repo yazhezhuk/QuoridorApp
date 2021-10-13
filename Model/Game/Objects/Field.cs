@@ -1,11 +1,13 @@
 using System.Collections.Generic;
+using System.Linq;
+using Core.Game.Types;
 
 namespace Core.Game.Objects
 {
 	public class Field : GameObject
 	{
 		public List<Wall> Walls { get; set; }
-		public List<Cell> Cells { get; }
+		public List<Cell> Cells { get; private set; }
 
 		public Cell[,] CellsAsArray
 		{
@@ -21,14 +23,27 @@ namespace Core.Game.Objects
 			}
 		}
 
-
-
-
-		public Field(List<Cell> gameCells, List<Wall> gameWalls)
+		public Field(List<Wall> gameWalls)
 		{
-			Cells = gameCells;
 			Walls = gameWalls;
+			PopulateField();
 		}
+
+		private void PopulateField()
+		{
+			Cells = new List<Cell>();
+			for (int i = 0; i < 9; i++)
+			{
+				for (int j = 0; j < 9; j++)
+					Cells.Add(new Cell(new Coordinates(j, i)));
+			}
+		}
+
+		public void SetFigure(Player player, Coordinates coordinates)
+		{
+			Cells.Find(cell => cell.Coordinates == coordinates).StandingPlayer = player;
+		}
+
 
 	}
 }

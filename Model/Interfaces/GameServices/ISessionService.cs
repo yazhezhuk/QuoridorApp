@@ -9,6 +9,5 @@ namespace Core.Interfaces.GameServices
 		Player GetCurrentPlayer();
 		Player GetOpponentPlayer();
 		bool ValidateVictory(Cell targetCell);
-
 	}
 }

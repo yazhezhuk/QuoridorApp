@@ -16,6 +16,12 @@ namespace Core.Game.Objects
 			StandingPlayer = standingPlayer;
 		}
 
+		public Cell((int x, int y) coordinates)
+		{
+			Coordinates = new Coordinates(coordinates.x,coordinates.y);
+			StandingPlayer = Player.None;
+		}
+
 		public Cell(Coordinates coordinates)
 		{
 			Coordinates = coordinates;
