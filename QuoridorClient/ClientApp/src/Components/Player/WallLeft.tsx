@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Step } from "../../Utils";
 import WallItem from "./WallItem";
 
@@ -10,7 +10,7 @@ interface Props {
 const WallLeft = ({playerId, step}: Props) => {
     const {remainingWalls} = playerId === 0 ? step.player0 : step.player1
     return(
-        <div>
+        <div >
             {new Array(remainingWalls >= 0 ? remainingWalls : 0)
             .fill(1)
             .map((_,x) =>{
