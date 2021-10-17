@@ -1,0 +1,10 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Core",
+    "\\Core\\Game",
+    "\\Core\\Services"
+  ],
+  "SelectedNode": "\\Core\\Services\\MoveService.cs",
+  "PreviewInSolutionExplorer": false
+}

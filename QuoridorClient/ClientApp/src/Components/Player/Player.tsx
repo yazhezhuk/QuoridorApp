@@ -1,28 +1,16 @@
-import React from "react";
-import {  CustomPIXIComponent } from "react-pixi-fiber";
-import {Graphics} from "pixi.js";
+import { Graphics } from "pixi.js";
+import { PixiComponent } from "@inlet/react-pixi";
+import CircleIcon from "@mui/icons-material/Circle";
+import { Icon } from "@mui/material";
+interface PlayerProps {
+  onColor: string;
+}
 
-interface Props {
-    position: { x: number; y: number };
-    color: number;
-    radius: number;
+const Player = ({ onColor }: PlayerProps) => {
+  const width = (window.screen.availHeight * 0.8) / 11;
+  return (
+    <CircleIcon color="primary" sx={{ fontSize: width, color: onColor }} />
+  );
+};
 
-  }
-
-export default CustomPIXIComponent<Graphics,Props>({
-
-  customDisplayObject: () => new Graphics(),
-  customApplyProps: function(instance, oldProps, newProps) {
-   
-    const { color, position, radius, ...newPropsRest } = newProps;
-    const { color: oldFColor, position: oldPosition, radius: oldRadius,...oldPropsRest } = oldProps;
-    const {x,y} = position
-    if (typeof oldProps !== "undefined") {
-      instance.clear();
-    }
-    instance.beginFill(0xeee);
-    instance.drawCircle(x, y, radius);
-    instance.endFill();
-
-  },
-}, 'Player')
+export default Player;
