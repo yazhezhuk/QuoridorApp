@@ -64,15 +64,15 @@ namespace Core.Services
 			}
 			bool canPlace = true;
 			Wall wallObject = direction == Direction.Horizontal
-				? new HorizontalWall { X = wall.Y, Y = wall.X }
-				: new VerticalWall { X = wall.X, Y = wall.Y };
-
-			_wallService.AddWall(wallObject);
+				? new HorizontalWall { X = wall.X, Y = wall.Y }
+				: new VerticalWall { X = wall.X, Y  = wall.Y };
 
 			foreach (var walls in otherWalls)
 			{
-				canPlace &= !wallObject.Intersects(wall);
+				canPlace &= !wallObject.Intersects(walls);
 			}
+			_wallService.AddWall(wallObject);
+
 
 			if (canPlace && PlayerCanReachOppositeSide())
 			{

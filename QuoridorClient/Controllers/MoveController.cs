@@ -73,7 +73,7 @@ namespace QuoridorClient.Controllers
 				.Select<WallViewModel,Wall>(wall =>
 					wall.direction == 1
 						? new HorizontalWall { X = wall.position.Y, Y = wall.position.X }
-						: new VerticalWall{X = wall.position.X,Y = wall.position.Y})
+						: new VerticalWall{X = wall.position.Y,Y = wall.position.X})
 				.ToList();
 
 		_gameSession.Turn = context.turn;
@@ -83,11 +83,7 @@ namespace QuoridorClient.Controllers
 			_gameSession.GameField.SetFigure(_gameSessionService.GetOpponentPlayer(), context.opponent);
 
 			var result = _moveService.TryPlaceWall(new Wall{ X =context.toSetup.position.X, Y = context.toSetup.position.Y },
-			(Direction)context.toSetup.direction, context.otherWalls.Select<WallViewModel,Wall>(wallVm =>
-				wallVm.direction == 1
-					? new HorizontalWall{ X = wallVm.position.X, Y = wallVm.position.Y }
-					: new VerticalWall{ X = wallVm.position.Y, Y = wallVm.position.X}
-				).ToList());
+			(Direction)context.toSetup.direction,_gameSession.GameField.Walls);
 			return JsonSerializer.Serialize(result);
 		}
 	}
