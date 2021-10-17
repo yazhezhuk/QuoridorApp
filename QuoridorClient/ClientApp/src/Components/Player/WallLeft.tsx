@@ -11,6 +11,9 @@ const WallLeft = ({playerId, step}: Props) => {
     const {remainingWalls} = playerId === 0 ? step.player0 : step.player1
     return(
         <div >
+            <div>
+                Player {playerId}
+            </div>
             {new Array(remainingWalls >= 0 ? remainingWalls : 0)
             .fill(1)
             .map((_,x) =>{

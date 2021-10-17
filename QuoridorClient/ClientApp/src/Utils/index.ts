@@ -1,6 +1,5 @@
 //тут будуть типи, які потрібно
-import {Position} from "../api/api";
-
+import { Position } from "../api/api";
 
 export enum Event {
   mouseover = "mouseover",
@@ -9,9 +8,8 @@ export enum Event {
 
 export enum WallDirection {
   vertical = 0,
-  horizontal = 1
+  horizontal = 1,
 }
-
 
 export enum Color {
   lightGray = "#fffafa",
@@ -51,13 +49,35 @@ export const isEven = (x: number): boolean => {
 };
 
 export interface HoveredWall {
-  direction : WallDirection,
+  direction: WallDirection;
   first: Position;
-  second: Position
-  third: Position
+  second: Position;
+  third: Position;
 }
 
 export interface WallToSend {
-  direction: number,
-  position: Position
+  direction: number;
+  position: Position;
 }
+
+export const initialHoverValue: boolean[][] = new Array(17)
+  .fill(false)
+  .map((_) => {
+    return new Array(17).fill(false);
+  });
+
+export const initialStep = {
+  player0: {
+    x: 0,
+    y: 8,
+    remainingWalls: 10,
+  },
+  player1: {
+    x: 16,
+    y: 8,
+    remainingWalls: 10,
+  },
+  walls: [],
+  wallsToSend: [],
+  stepNumber: 0,
+};
