@@ -26,7 +26,7 @@ namespace Core.Services
 		public bool ValidateVictory(Cell targetCell)
 		{
 			return _gameSession.GameField.Cells
-				.Where(cell => cell.Coordinates.Y == (_gameSession.Turn % 2 == 0 ? 8 : 0))
+				.Where(cell => cell.Coordinates.X == (_gameSession.Turn % 2 == 0 ? 8 : 0))
 				.Contains(targetCell);
 		}
 

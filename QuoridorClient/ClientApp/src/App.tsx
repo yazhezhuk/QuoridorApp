@@ -72,7 +72,8 @@ function App() {
           wallsToSend
         )
         .then((result) => {
-          if (result) {
+            if (result) {
+            getWinner(position)
             nextStep.player0.x = position.x;
             nextStep.player0.y = position.y;
             setStep(nextStep);
@@ -88,14 +89,15 @@ function App() {
           wallsToSend
         )
         .then((result) => {
-          if (result) {
+            if (result) {
+            getWinner(position)
             nextStep.player1.x = position.x;
             nextStep.player1.y = position.y;
             setStep(nextStep);
           }
         });
     }
-      getWinner(position)
+      
   };
 
   const putWall = (position: HoveredWall) => {
