@@ -61,7 +61,7 @@ function App() {
       },
       stepNumber: step.stepNumber + 1,
     };
-    debugger;
+      
     if (isEven(stepNumber)) {
       playerAPI
         .tryMove(
@@ -95,6 +95,7 @@ function App() {
           }
         });
     }
+      getWinner(position)
   };
 
   const putWall = (position: HoveredWall) => {
@@ -194,12 +195,13 @@ function App() {
     }
   };
 
-  const getWinner = () =>{
-    const { player0, player1 } = step;
-    if(player0.x===16){
+    const getWinner = (position: { x: number; y: number }) =>{
+        const { x, y } = position;
+      console.log(x)
+    if(x===16){
       setWinner(0)
       setOpen(true)
-    }else if(player1.x===0){
+    }else if(x===0){
       setWinner(1)
       setOpen(true)
     }
