@@ -31,7 +31,7 @@ namespace Core.Services
 				.ForEach(Console.WriteLine);
 			Console.WriteLine(move);
 
-			return CanExecuteMove(move) && !MoveIsBlocked(move);
+			return TryExecuteMove(move).CanExecute && !MoveIsBlocked(move);
 		}
 
 		public ISet<PlayerFigureMove> GetFiguresBlockedDisplacements()
@@ -56,44 +56,45 @@ namespace Core.Services
 			GetFiguresBlockedDisplacements().Contains(move);
 
 
-		public bool TryPlaceWall(int wallId, int line, int offset, Direction direction)
+		public ActionResult TryPlaceWall(Wall wall, Direction direction, List<Wall> otherWalls)
 		{
-			if (line > 6 || offset > 7)
+			if (wall.X > 6 || wall.Y > 7)
 			{
-				return false;
+				return new ActionResult(false);
 			}
 			bool canPlace = true;
 			Wall wallObject = direction == Direction.Horizontal
-				? new HorizontalWall { Id = wallId, Line = line, OffsetFromEdge = offset }
-				: new VerticalWall { Id = wallId, Line = line, OffsetFromEdge = offset };
+				? new HorizontalWall { X = wall.Y, Y = wall.X }
+				: new VerticalWall { X = wall.X, Y = wall.Y };
 
 			_wallService.AddWall(wallObject);
 
-			foreach (var wall in _wallService.GetAllWalls().Where(wall => wall.Id != wallId))
+			foreach (var walls in otherWalls)
 			{
 				canPlace &= !wallObject.Intersects(wall);
 			}
 
 			if (canPlace && PlayerCanReachOppositeSide())
 			{
-				return true;
+				return new ActionResult(true);
 			}
 
 			_wallService.RemoveWall(wallObject);
-			return false;
+			return new ActionResult(false);
 		}
 
 		private bool ValidateMoveThroughPlayer(Cell sourceCell, Cell targetCell)
 		{
 			var opponentFigureCell = _cellService.GetCellWithPlayerFigure(_gameSessionService.GetOpponentPlayer());
 
-			if (sourceCell.GetDistanceToAnotherCell(targetCell) > 2)
+			if (sourceCell.GetDistanceToAnotherCell(targetCell) > 2 ||
+			    sourceCell.GetDistanceToAnotherCell(opponentFigureCell) > 1)
 				return false;
 
 			var expectedTargetCell = _cellService.GetNonDiagonalAdjacentCells(opponentFigureCell)
-				.First(cell => cell.StandingPlayer == Player.None && (
-				               cell.IsSameRow(sourceCell) || cell.IsSameRow(sourceCell)));
-
+				.FirstOrDefault(cell => cell.StandingPlayer == Player.None && (
+				               cell.IsSameRow(sourceCell) || cell.IsSameColumn(sourceCell)));
+			if (expectedTargetCell == null) return false;
 			if (targetCell != expectedTargetCell && targetCell.GetDistanceToAnotherCell(expectedTargetCell) < 2)
 			{
 				return ValidateMoveThroughPlayer(sourceCell, expectedTargetCell);
@@ -123,7 +124,7 @@ namespace Core.Services
 
 			foreach (var neighbourCell in validUnvisitedNeighbours)
 			{
-				if (!CanExecuteMove(new PlayerFigureMove(cell, neighbourCell)) ||
+				if (!TryExecuteMove(new PlayerFigureMove(cell, neighbourCell)).CanExecute ||
 				    visitedCells.Contains(neighbourCell))
 					continue;
 
@@ -140,17 +141,24 @@ namespace Core.Services
 
 		private bool ValidateDiagonalMove(Cell sourceCell, Cell targetCell) =>
 			!ValidateMoveThroughPlayer(sourceCell, targetCell) &&
-			_cellService.CellIsNonDiagonalNeighbour(sourceCell, targetCell) &&
+			_cellService.IsDiagonalCellNeighbour(sourceCell, targetCell) &&
             _cellService.GetNonDiagonalCellNeighbours(targetCell)
 	            .Any(cell => cell.StandingPlayer == _gameSessionService.GetOpponentPlayer());
 
 
-		public bool CanExecuteMove(PlayerFigureMove move) =>
-		    !MoveIsBlocked(move) && (
-			ValidateLinearMove(move.Source, move.Target) ||
-			ValidateDiagonalMove(move.Source, move.Target) ||
-			ValidateMoveThroughPlayer(move.Source, move.Target));
+		public ActionResult TryExecuteMove(PlayerFigureMove move)
+		{
+			var canMove =
+				!MoveIsBlocked(move) &&
+				(
+					ValidateLinearMove(move.Source, move.Target) ||
+					ValidateDiagonalMove(move.Source, move.Target) ||
+					ValidateMoveThroughPlayer(move.Source, move.Target));
 
+			var result = new ActionResult(canMove);
 
+			return result;
+
+		}
 	}
 }

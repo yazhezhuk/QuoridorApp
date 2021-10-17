@@ -64,8 +64,8 @@ namespace Core.Game.Objects
 
 		public int GetDistanceToAnotherCell(Cell other)
 		{
-			return ( Math.Abs(other.Coordinates.X - Coordinates.X)) +
-			                         Math.Abs((other.Coordinates.Y - Coordinates.Y));
+			return Math.Abs(other.Coordinates.X - Coordinates.X) +
+			                         Math.Abs(other.Coordinates.Y - Coordinates.Y);
 		}
 
 		public bool Equals(Cell other)
@@ -76,6 +76,8 @@ namespace Core.Game.Objects
 
 		public static bool operator ==(Cell c1, Cell c2)
 		{
+			if (ReferenceEquals(c1, c2)) return true;
+
 			return c1.Equals(c2);
 		}
 

@@ -1,4 +1,5 @@
 using System;
+using System.Text.Json.Serialization;
 using Core.Game.Types;
 using Core.Interfaces.Game.Shared;
 
@@ -6,9 +7,13 @@ namespace Core.Game.Objects.Actions
 {
 	public struct PlayerFigureMove : IEquatable<PlayerFigureMove>, IComparable<PlayerFigureMove>
 	{
+		[JsonIgnore]
 		public Cell Source { get; set; }
+		[JsonIgnore]
 		public Cell Target { get; set; }
+		public bool CanMove { get; private set; }
 
+		[JsonIgnore]
 		public MoveDirection MoveDirection
 		{
 			get
@@ -41,10 +46,13 @@ namespace Core.Game.Objects.Actions
 			}
 		}
 
+		public void ValidateMove() => CanMove = true;
+
 		public PlayerFigureMove(Cell source, Cell target)
 		{
 			Source = source;
 			Target = target;
+			CanMove = false;
 		}
 
 		public override string ToString()

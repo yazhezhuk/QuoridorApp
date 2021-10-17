@@ -13,9 +13,9 @@ namespace Core.Interfaces.GameServices
 
 		public bool ValidatePlayerFigureMove(PlayerFigureMove move);
 		public bool MoveIsBlocked(PlayerFigureMove move);
-		public bool TryPlaceWall(int wallId, int line, int offset, Direction direction);
+		public ActionResult TryPlaceWall(Wall wall, Direction direction, List<Wall> other);
 		public bool PlayerCanReachOppositeSide();
-		public bool CanExecuteMove(PlayerFigureMove move);
+		public ActionResult TryExecuteMove(PlayerFigureMove move);
 
 
 	}

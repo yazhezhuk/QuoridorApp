@@ -1,4 +1,3 @@
-import { Container, Stage } from "@inlet/react-pixi";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
 import { Color, HoveredWall, Step } from "../Utils";
@@ -34,9 +33,7 @@ const Field = ({
     x: number,
     y: number
   ): string => {
-    const isClick = step.walls.find((wall) => wall.x === x && wall.y === y)
-      ? true
-      : false;
+    const isClick = !!step.walls.find((wall) => wall.X === x && wall.Y === y);
 
     return isClick ? "#002884" : isHover ? Color.blue : Color.lightBlue;
   };

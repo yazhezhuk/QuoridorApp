@@ -2,15 +2,18 @@ using System;
 using System.Collections.Generic;
 using Core.Game.Objects;
 using Microsoft.AspNetCore.Mvc;
+using Nest;
+using QuoridorClient.Model;
 
 namespace QuoridorClient
 {
-	public class MoveContext
+	public class FigureMoveContext
 	{
-		public ValueTuple<int, int> From { get; set; }
-		public ValueTuple<int, int> To { get; set; }
-		public int Turn { get; set; }
-		public ValueTuple<int, int> Opponent { get; set; }
-		public List<Wall> Walls { get; set; }
+		public Coordinates cellTo { get; set; }
+		public Coordinates cellFrom { get; set; }
+
+		public int turn { get; set; }
+		public Coordinates opponent { get; set; }
+		public List<WallViewModel> walls { get; set; } = new List<WallViewModel>();
 	}
 }

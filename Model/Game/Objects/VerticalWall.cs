@@ -5,8 +5,8 @@ namespace Core.Game.Objects
 {
 	public class VerticalWall : Wall
 	{
-		public override Cell BeginCell => new Cell(Line,OffsetFromEdge);
-		public override Cell EndCell => new Cell(Line, OffsetFromEdge + 1);
+		public override Cell BeginCell => new Cell(Y,X);
+		public override Cell EndCell => new Cell(Y, X + 1);
 		public override List<Cell> GetAdjacentCells() =>
 			new List<Cell>
 			{

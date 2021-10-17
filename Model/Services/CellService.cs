@@ -32,6 +32,10 @@ namespace Core.Services
 				neighbourCell.IsNeighbourInColumnWith(cell)
 				|| neighbourCell.IsNeighbourInRowWith(cell));
 
+		public bool IsDiagonalCellNeighbour(Cell target,Cell source) =>
+			_gameSession.GameField.Cells.FindAll(neighbourCell =>
+				neighbourCell.IsNeighbourInDiagonalWith(target)).Contains(source);
+
 		public List<Cell> GetCellNeighbours(Cell cell) =>
 			_gameSession.GameField.Cells.FindAll(neighbourCell =>
 				neighbourCell.IsNeighbourInColumnWith(cell)
@@ -56,8 +60,6 @@ namespace Core.Services
 				.Count(cell => cell.HasPlayerFigure() && cell != sourceCell) != 0;
 		}
 
-
-
-
+		public Cell GetByCoordinates(Coordinates coord) => _gameSession.GameField.Cells.Find(cell => cell.Coordinates == coord);
 	}
 }

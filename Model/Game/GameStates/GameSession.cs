@@ -6,7 +6,7 @@ namespace Core.Game.GameStates
 {
 	public class GameSession
 	{
-		public Player CurrentPlayer { get; }
+		public Player CurrentPlayer { get; set; }
 		public int Turn { get; set; }
 		public Field GameField { get; }
 

@@ -1,5 +1,3 @@
-import { PixiComponent, Stage } from "@inlet/react-pixi";
-import { Graphics } from "pixi.js";
 import { Color, Event, HoveredWall, Step } from "../Utils";
 import Player from "./Player/Player";
 import Box from "@mui/material/Box";

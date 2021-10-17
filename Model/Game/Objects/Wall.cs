@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using Core.Game.Objects.Actions;
 using Core.Game.Types;
 using Core.Interfaces.Game;
@@ -7,28 +8,25 @@ using Core.Interfaces.Game.Objects;
 
 namespace Core.Game.Objects
 { 
-	public abstract class Wall : GameObject
+	public class Wall
 	{
 
-		public Wall(){}
 
-		public Wall(int line, int offsetFromEdge)
-		{
-			Line = line;
-			OffsetFromEdge = offsetFromEdge;
-		}
 
 		public const int WallSize = 1;
 
-		public int OffsetFromEdge { get; set; }
+		public int X { get; set; }
 		
-		public int Line { get; set; }
+		public int Y { get; set; }
 
-		public abstract Cell BeginCell { get; }
+		public virtual Cell BeginCell { get; }
 
-		public abstract Cell EndCell { get; }
+		public virtual Cell EndCell { get; }
 
-		public abstract List<Cell> GetAdjacentCells();
+		public virtual List<Cell> GetAdjacentCells()
+		{
+			return new List<Cell>();
+		}
 
 		public bool Intersects(Wall other)
 		{

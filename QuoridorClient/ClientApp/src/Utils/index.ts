@@ -1,8 +1,17 @@
 //тут будуть типи, які потрібно
+import {Position} from "../api/api";
+
+
 export enum Event {
   mouseover = "mouseover",
   mouseout = "mouseout",
 }
+
+export enum WallDirection {
+  vertical = 0,
+  horizontal = 1
+}
+
 
 export enum Color {
   lightGray = "#fffafa",
@@ -23,7 +32,8 @@ export type Player = {
   stepSize: number;
 };
 export type Step = {
-  walls: { x: number; y: number }[];
+  wallsToSend: WallToSend[];
+  walls: Position[];
   player0: {
     x: number;
     y: number;
@@ -41,16 +51,13 @@ export const isEven = (x: number): boolean => {
 };
 
 export interface HoveredWall {
-  first: {
-    x: number;
-    y: number;
-  };
-  second: {
-    x: number;
-    y: number;
-  };
-  third: {
-    x: number;
-    y: number;
-  };
+  direction : WallDirection,
+  first: Position;
+  second: Position
+  third: Position
+}
+
+export interface WallToSend {
+  direction: number,
+  position: Position
 }

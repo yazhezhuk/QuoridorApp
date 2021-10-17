@@ -19,8 +19,8 @@ namespace Core.Services
 			return _gameSession.Turn % 2 == (int)_gameSession.CurrentPlayer;
 		}
 
-		public Player GetCurrentPlayer() => _gameSession.CurrentPlayer;
-		public Player GetOpponentPlayer() => _gameSession.CurrentPlayer == Player.First ? Player.Second : Player.First;
+		public Player GetCurrentPlayer() => _gameSession.Turn % 2 == 0 ? Player.First : Player.Second ;
+		public Player GetOpponentPlayer() => GetCurrentPlayer() == Player.First ? Player.Second : Player.First;
 
 
 		public bool ValidateVictory(Cell targetCell)

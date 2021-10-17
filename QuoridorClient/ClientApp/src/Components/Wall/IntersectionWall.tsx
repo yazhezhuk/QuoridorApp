@@ -1,7 +1,4 @@
-import { PixiComponent } from '@inlet/react-pixi'
 import { Box } from '@mui/system';
-import { Graphics } from 'pixi.js'
-import { Color } from '../../Utils';
 
 interface WallProps {
   position: { x: number; y: number };

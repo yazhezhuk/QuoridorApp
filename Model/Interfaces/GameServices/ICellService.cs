@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Core.Game.Objects;
 using Core.Game.Types;
+using Core.Services;
 
 namespace Core.Interfaces.GameServices
 {

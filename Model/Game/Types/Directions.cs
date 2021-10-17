@@ -2,9 +2,8 @@ namespace Core.Game.Types
 { 
 	public enum Direction
 	{
-		Horizontal,
 		Vertical,
-		None
+		Horizontal
 	}
 	public enum MoveDirection
 	{

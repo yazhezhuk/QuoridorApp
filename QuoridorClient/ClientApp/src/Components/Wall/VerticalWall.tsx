@@ -1,7 +1,5 @@
-import { PixiComponent } from "@inlet/react-pixi";
 import { Box } from "@mui/system";
-import { Graphics } from "pixi.js";
-import { Color, Event, HoveredWall } from "../../Utils";
+import {Color, Event, HoveredWall, WallDirection} from "../../Utils";
 
 interface WallProps {
   position: { x: number; y: number };
@@ -17,17 +15,18 @@ const VerticalWall = ({ position, color, mouseHover, mouseOut, putWall }: WallPr
   const height = (window.screen.availHeight * 0.8) / 11;
 
   const hoveredWall: HoveredWall = {
-    first: {
-      x: position.x,
-      y: position.y,
+      direction : WallDirection.vertical,
+      first: {
+      X: position.x,
+      Y: position.y,
     },
     second: {
-      x: position.x,
-      y: position.y === 16 ? position.y - 1 : position.y + 1,
+      X: position.x,
+      Y: position.y === 16 ? position.y - 1 : position.y + 1,
     },
     third: {
-      x: position.x,
-      y: position.y === 16 ? position.y - 2 : position.y + 2,
+      X: position.x,
+      Y: position.y === 16 ? position.y - 2 : position.y + 2,
     },
   };
   return (

@@ -5,8 +5,8 @@ namespace Core.Game.Objects
 {
 	public class HorizontalWall : Wall
 	{
-		public override Cell BeginCell => new Cell(OffsetFromEdge,Line);
-		public override Cell EndCell => new Cell(OffsetFromEdge + 1, Line);
+		public override Cell BeginCell => new Cell(X,Y);
+		public override Cell EndCell => new Cell(X + 1, Y);
 		public override List<Cell> GetAdjacentCells() =>
 			new List<Cell>
 			{

@@ -1,7 +1,4 @@
-import { Graphics } from "pixi.js";
-import { PixiComponent } from "@inlet/react-pixi";
 import CircleIcon from "@mui/icons-material/Circle";
-import { Icon } from "@mui/material";
 interface PlayerProps {
   onColor: string;
 }
