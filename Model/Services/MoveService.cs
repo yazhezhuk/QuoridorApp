@@ -58,7 +58,7 @@ namespace Core.Services
 
 		public ActionResult TryPlaceWall(Wall wall, Direction direction, List<Wall> otherWalls)
 		{
-			if (wall.X > 6 || wall.Y > 7)
+			if (wall.X > 7 || wall.Y > 7)
 			{
 				return new ActionResult(false);
 			}

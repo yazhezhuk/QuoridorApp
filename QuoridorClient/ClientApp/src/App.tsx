@@ -124,7 +124,10 @@ function App() {
     const tempWalls = [
       ...wallsToSend,
       { direction, position: { X: first.X / 2, Y: first.Y / 2 } },
-    ];
+      ];
+      if (step.walls.find((wall) => wall.X === first.X && wall.Y === first.Y)){return}
+      else if (step.walls.find((wall) => wall.X === second.X && wall.Y === second.Y)){return}
+      else if (step.walls.find((wall) => wall.X === third.X && wall.Y === third.Y)){return}
 
     if (isEven(stepNumber)) {
       playerAPI
@@ -178,7 +181,7 @@ function App() {
           if (step.player1.remainingWalls === 0 || !result) {
             return;
           }
-          nextStep.player0.remainingWalls -= 1;
+          nextStep.player1.remainingWalls -= 1;
           nextStep.walls = [...walls, ...desiredPosition];
           nextStep.wallsToSend = [
             ...wallsToSend,
@@ -197,11 +200,12 @@ function App() {
 
     const getWinner = (position: { x: number; y: number }) =>{
         const { x, y } = position;
+        const {stepNumber} = step
       console.log(x)
-    if(x===16){
+        if (x === 16 && stepNumber %2 === 0){
       setWinner(0)
       setOpen(true)
-    }else if(x===0){
+    }else if(x===0 && stepNumber %2 === 1){
       setWinner(1)
       setOpen(true)
     }
