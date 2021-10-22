@@ -8,6 +8,6 @@ namespace Core.Interfaces.GameServices
 		bool ValidateTurn(Player player);
 		Player GetCurrentPlayer();
 		Player GetOpponentPlayer();
-		bool ValidateVictory(Cell targetCell);
+		bool ValidateVictory(Cell targetCell,Player player);
 	}
 }

@@ -64,8 +64,8 @@ namespace Core.Services
 			}
 			bool canPlace = true;
 			Wall wallObject = direction == Direction.Horizontal
-				? new HorizontalWall { X = wall.X, Y = wall.Y }
-				: new VerticalWall { X = wall.X, Y  = wall.Y };
+				? new HorizontalWall { Y = wall.X, X = wall.Y }
+				: new VerticalWall { Y = wall.X, X = wall.Y };
 
 			foreach (var walls in otherWalls)
 			{
@@ -74,7 +74,8 @@ namespace Core.Services
 			_wallService.AddWall(wallObject);
 
 
-			if (canPlace && PlayerCanReachOppositeSide())
+			if (canPlace && PlayerCanReachOppositeSide(_gameSessionService.GetCurrentPlayer()) &&
+			PlayerCanReachOppositeSide(_gameSessionService.GetOpponentPlayer()))
 			{
 				return new ActionResult(true);
 			}
@@ -107,15 +108,15 @@ namespace Core.Services
 			       !MoveIsBlocked(moveFromSourceToOpponentCell);
 		}
 
-		public bool PlayerCanReachOppositeSide()
+		public bool PlayerCanReachOppositeSide(Player player)
 		{
-			var playerFigure = _cellService.GetCellWithPlayerFigure(_gameSessionService.GetCurrentPlayer());
+			var playerFigure = _cellService.GetCellWithPlayerFigure(player);
 			var visitedCells = new HashSet<Cell>{ playerFigure };
 
 			DepthFirstSearch(playerFigure, visitedCells);
 
 			return visitedCells.Aggregate(false, (canMove, visitedCell) =>
-				canMove | _gameSessionService.ValidateVictory(visitedCell));
+				canMove | _gameSessionService.ValidateVictory(visitedCell,player));
 		}
 
 		private void DepthFirstSearch(Cell cell, HashSet<Cell> visitedCells)

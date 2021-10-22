@@ -23,10 +23,10 @@ namespace Core.Services
 		public Player GetOpponentPlayer() => GetCurrentPlayer() == Player.First ? Player.Second : Player.First;
 
 
-		public bool ValidateVictory(Cell targetCell)
+		public bool ValidateVictory(Cell targetCell,Player player)
 		{
 			return _gameSession.GameField.Cells
-				.Where(cell => cell.Coordinates.X == (_gameSession.Turn % 2 == 0 ? 8 : 0))
+				.Where(cell => cell.Coordinates.X == (player == Player.First ? 8 : 0))
 				.Contains(targetCell);
 		}
 

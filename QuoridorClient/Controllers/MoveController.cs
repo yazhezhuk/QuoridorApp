@@ -73,7 +73,7 @@ namespace QuoridorClient.Controllers
 				.Select<WallViewModel,Wall>(wall =>
 					wall.direction == 1
 						? new HorizontalWall { X = wall.position.Y, Y = wall.position.X }
-						: new VerticalWall{X = wall.position.Y,Y = wall.position.X})
+						: new VerticalWall{ X = wall.position.Y, Y = wall.position.X})
 				.ToList();
 
 		_gameSession.Turn = context.turn;

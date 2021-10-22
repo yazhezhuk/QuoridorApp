@@ -134,14 +134,14 @@ function App() {
     if (isEven(stepNumber)) {
       playerAPI
         .tryWall(
-          { Y: step.player0.x / 2, X: step.player0.y / 2 },
-          { Y: step.player1.x / 2, X: step.player1.y / 2 },
+          { X: step.player0.x / 2, Y: step.player0.y / 2 },
+          { X: step.player1.x / 2, Y: step.player1.y / 2 },
           step.stepNumber,
           {
             direction,
             position: {
-              X: Math.trunc(first.X / 2),
-              Y: Math.trunc(first.Y / 2),
+              Y: Math.trunc(first.X / 2),
+              X: Math.trunc(first.Y / 2),
             },
           },
           wallsToSend
@@ -157,8 +157,8 @@ function App() {
             {
               direction: direction,
               position: {
-                X: Math.trunc(first.X / 2),
-                Y: Math.trunc(first.Y / 2),
+                Y: Math.trunc(first.X / 2),
+                X: Math.trunc(first.Y / 2),
               },
             },
           ];
@@ -167,14 +167,14 @@ function App() {
     } else {
       playerAPI
         .tryWall(
-          { Y: step.player1.x / 2, X: step.player1.y / 2 },
-          { Y: step.player0.x / 2, X: step.player0.y / 2 },
+          { X: step.player1.x / 2, Y: step.player1.y / 2 },
+          { X: step.player0.x / 2, Y: step.player0.y / 2 },
           step.stepNumber,
           {
             direction,
             position: {
-              X: Math.trunc(first.X / 2),
-              Y: Math.trunc(first.Y / 2),
+              Y: Math.trunc(first.X / 2),
+              X: Math.trunc(first.Y / 2),
             },
           },
           wallsToSend
@@ -190,8 +190,8 @@ function App() {
             {
               direction: direction,
               position: {
-                X: Math.trunc(first.X / 2),
-                Y: Math.trunc(first.Y / 2),
+                Y: Math.trunc(first.X / 2),
+                X: Math.trunc(first.Y / 2),
               },
             },
           ];

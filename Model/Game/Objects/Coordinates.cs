@@ -9,8 +9,8 @@ namespace Core.Game.Objects
 	public record Coordinates : IComparable<Coordinates>
 	{
 
-		public int X { get; set; }
 		public int Y { get; set; }
+		public int X { get; set; }
 
 		public Coordinates(int x, int y)
 		{
