@@ -41,64 +41,64 @@ function App() {
     setHover(temp);
   };
 
-  const makeMove = async (position: { x: number; y: number }) => {
-    const { player0, player1, stepNumber } = step;
-    const [...walls] = step.walls;
-    const [...wallsToSend] = step.wallsToSend;
+    const makeMove = async (position: { x: number; y: number }) => {
+        const { player0, player1, stepNumber } = step;
+        const [...walls] = step.walls;
+        const [...wallsToSend] = step.wallsToSend;
 
-    const nextStep = {
-      walls,
-      wallsToSend,
-      player0: {
-        x: player0.x,
-        y: player0.y,
-        remainingWalls: step.player0.remainingWalls,
-      },
-      player1: {
-        x: player1.x,
-        y: player1.y,
-        remainingWalls: step.player1.remainingWalls,
-      },
-      stepNumber: step.stepNumber + 1,
+        const nextStep = {
+            walls,
+            wallsToSend,
+            player0: {
+                x: player0.x,
+                y: player0.y,
+                remainingWalls: step.player0.remainingWalls,
+            },
+            player1: {
+                x: player1.x,
+                y: player1.y,
+                remainingWalls: step.player1.remainingWalls,
+            },
+            stepNumber: step.stepNumber + 1,
+        };
+
+        if (isEven(stepNumber)) {
+            playerAPI
+                .tryMove(
+                    { Y: player0.y / 2, X: player0.x / 2 },
+                    { X: position.x / 2, Y: position.y / 2 },
+                    step.stepNumber,
+                    { X: player1.x / 2, Y: player1.y / 2 },
+                    wallsToSend
+                )
+                .then((result) => {
+                    if (result) {
+                        getWinner(position)
+                        nextStep.player0.x = position.x;
+                        nextStep.player0.y = position.y;
+                        setStep(nextStep);
+                    }
+                });
+        } else {
+            playerAPI
+                .tryMove(
+                    { X: player1.x / 2, Y: player1.y / 2 },
+                    { X: position.x / 2, Y: position.y / 2 },
+                    step.stepNumber,
+                    { X: player0.x / 2, Y: player0.y / 2 },
+                    wallsToSend
+                )
+                .then((result) => {
+                    if (result) {
+                        getWinner(position)
+                        nextStep.player1.x = position.x;
+                        nextStep.player1.y = position.y;
+                        setStep(nextStep);
+                    }
+                });
+        }
+
     };
-      
-    if (isEven(stepNumber)) {
-      playerAPI
-        .tryMove(
-          { X: player0.y / 2, Y: player0.x / 2 },
-          { Y: position.x / 2, X: position.y / 2 },
-          step.stepNumber,
-          { Y: player1.x / 2, X: player1.y / 2 },
-          wallsToSend
-        )
-        .then((result) => {
-            if (result) {
-            getWinner(position)
-            nextStep.player0.x = position.x;
-            nextStep.player0.y = position.y;
-            setStep(nextStep);
-          }
-        });
-    } else {
-      playerAPI
-        .tryMove(
-          { Y: player1.x / 2, X: player1.y / 2 },
-          { Y: position.x / 2, X: position.y / 2 },
-          step.stepNumber,
-          { Y: player0.x / 2, X: player0.y / 2 },
-          wallsToSend
-        )
-        .then((result) => {
-            if (result) {
-            getWinner(position)
-            nextStep.player1.x = position.x;
-            nextStep.player1.y = position.y;
-            setStep(nextStep);
-          }
-        });
-    }
-      
-  };
 
   const putWall = (position: HoveredWall) => {
     const { stepNumber } = step;

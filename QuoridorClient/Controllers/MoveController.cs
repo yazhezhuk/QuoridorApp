@@ -45,9 +45,9 @@ namespace QuoridorClient.Controllers
 			_gameSession.GameField.Walls = context
 				.walls
 				.Select<WallViewModel,Wall>(wall =>
-					wall.direction == 0
+					wall.direction == 1
 						? new HorizontalWall { X = wall.position.Y, Y = wall.position.X }
-						: new VerticalWall{X = wall.position.X,Y = wall.position.Y})
+						: new VerticalWall{ Y = wall.position.X, X = wall.position.Y})
 				.ToList();
 			_gameSession.Turn = context.turn;
 			_gameSession.CurrentPlayer = _gameSessionService.GetCurrentPlayer();

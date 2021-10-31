@@ -35,7 +35,6 @@
     </ItemGroup>
     <ItemGroup>
       <Folder Include="ClientApp\src\Utils" />
-      <Folder Include="Data" />
     </ItemGroup>
     <ItemGroup>
       <_ContentIncludedByDefault Remove="Pages\Error.cshtml" />
